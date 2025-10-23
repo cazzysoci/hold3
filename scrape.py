@@ -17,6 +17,7 @@ list = [
 'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/socks5.txt',
 'https://raw.githubusercontent.com/roosterkid/openproxylist/main/HTTPS_RAW.txt',
 'https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/https.txt',
+'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks4.txt',
 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks5.txt',
 'https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt',
 'https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt',
