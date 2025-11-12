@@ -12,6 +12,7 @@ fre = Fore.RESET
 
 list = [ 
 'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/socks4.txt',
+'https://proxyspace.pro/',
 'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt',
 'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/https.txt',
 'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/socks5.txt',
