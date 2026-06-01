@@ -32,14 +32,91 @@ const type_list = [
   "application/javascript", "text/css", "text/csv", "image/webp", "image/avif",
   "application/wasm", "text/plain", "application/graphql", "application/grpc",
   "application/grpc-web", "application/protobuf", "application/octet-stream",
-  "multipart/form-data", "application/x-www-form-urlencoded", "application/pdf"
+  "multipart/form-data", "application/x-www-form-urlencoded", "application/pdf",
+  "text/plain",
+  "text/html",
+  "application/json",
+  "application/xml",
+  "multipart/form-data",
+  "application/octet-stream",
+  "image/jpeg",
+  "image/png",
+  "audio/mpeg",
+  "video/mp4",
+  "application/javascript",
+  "application/pdf",
+  "application/vnd.ms-excel",
+  "application/vnd.ms-powerpoint",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  "application/zip",
+  "image/gif",
+  "image/bmp",
+  "image/tiff",
+  "audio/wav",
+  "audio/midi",
+  "video/avi",
+  "video/mpeg",
+  "video/quicktime",
+  "text/csv",
+  "text/xml",
+  "text/css",
+  "text/javascript",
+  "application/graphql",
+  "application/x-www-form-urlencoded",
+  "application/vnd.api+json",
+  "application/ld+json",
+  "application/x-pkcs12",
+  "application/x-pkcs7-certificates",
+  "application/x-pkcs7-certreqresp",
+  "application/x-pem-file",
+  "application/x-x509-ca-cert",
+  "application/x-x509-user-cert",
+  "application/x-x509-server-cert",
+  "application/x-bzip",
+  "application/x-gzip",
+  "application/x-7z-compressed",
+  "application/x-rar-compressed",
+  "application/x-shockwave-flash"
 ];
 
 // 2026 Updated platform list
 const platform2026 = [
-  "Windows 11", "Windows 12", "macOS Sequoia", "macOS", "Linux", 
-  "Android 16", "Android 15", "iOS 19", "iPadOS 19", "visionOS 2",
-  "ChromeOS", "HarmonyOS 5", "HyperOS 2", "One UI 7", "ColorOS 15"
+  "Windows 11", 
+  "Windows 12", 
+  "macOS Sequoia", 
+  "macOS", 
+  "Linux", 
+  "Android 16", 
+  "Android 15", 
+  "iOS 19", 
+  "iPadOS 19", 
+  "visionOS 2",
+  "ChromeOS", 
+  "HarmonyOS 5", 
+  "HyperOS 2", 
+  "One UI 7", 
+  "ColorOS 15",
+  "Windows",
+  "Windows Phone",
+  "Macintosh",
+  "Linux",
+  "iOS",
+  "Android",
+  "Iphone",
+  "PlayStation 4",
+  "Xbox One",
+  "Nintendo Switch",
+  "Apple TV",
+  "Amazon Fire TV",
+  "Roku",
+  "Chromecast",
+  "Smart TV",
+  "Mozilla",  
+  "Apple",  
+  "Windows", 
+  "Other"
 ];
 
 // 2026 Cipher suites
@@ -412,7 +489,13 @@ const cplist = [
 
 ];
 
+// 2026 Accept headers (SINGLE DECLARATION)
 const accept_header = [
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "application/json, text/plain, */*",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
   "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
   "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
   "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
@@ -460,14 +543,6 @@ const accept_header = [
 
 ];
 
-// 2026 Accept headers (SINGLE DECLARATION)
-const accept_header = [
-  "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-  "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-  "application/json, text/plain, */*",
-  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-  "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
-];
 
 // 2026 Language headers
 const lang_header = [
@@ -788,6 +863,7 @@ const headerFunc = {
   site() { return fetch_site[Math.floor(Math.random() * fetch_site.length)]; },
   countrys() { return country[Math.floor(Math.random() * country.length)]; },
   type() { return type_list[Math.floor(Math.random() * type_list.length)]; },
+  
 }
 
 function randstr(length) {
