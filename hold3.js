@@ -27,7 +27,7 @@ try {
 // ============= 2026 UPDATED CONFIGURATION LISTS =============
 const fetch_site = ["same-origin", "same-site", "cross-site", "none"];
 
-const type = [
+const type_list = [
   "text/html", "application/xhtml+xml", "application/xml", "application/json",
   "application/javascript", "text/css", "text/csv", "image/webp", "image/avif",
   "application/wasm", "text/plain", "application/graphql", "application/grpc",
@@ -460,7 +460,7 @@ const accept_header = [
 
 ];
 
-// 2026 Accept headers
+// 2026 Accept headers (SINGLE DECLARATION)
 const accept_header = [
   "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
   "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
@@ -471,6 +471,11 @@ const accept_header = [
 
 // 2026 Language headers
 const lang_header = [
+  'en-US,en;q=0.9',
+  'en-US,en;q=0.9,fr;q=0.8,de;q=0.7,es;q=0.6,ja;q=0.5,zh-CN;q=0.4',
+  'en-GB,en;q=0.9,en-US;q=0.8',
+  'en-US,en;q=0.9,es;q=0.8,pt;q=0.7',
+  'en-US,en;q=0.9,ru;q=0.8,uk;q=0.7',
   'en-US,en;q=0.9',
   'en-US,en;q=0.9,fr;q=0.8,de;q=0.7,es;q=0.6,ja;q=0.5,zh-CN;q=0.4',
   'en-GB,en;q=0.9,en-US;q=0.8',
@@ -644,8 +649,7 @@ const country = [
   "RS", "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN",
   "SO", "SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL",
   "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC",
-  "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW",
-  
+  "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW"
 ];
 
 const fetch_mode = ["navigate", "same-origin", "no-cors", "cors"];
@@ -783,7 +787,7 @@ const headerFunc = {
   dest() { return fetch_dest[Math.floor(Math.random() * fetch_dest.length)]; },
   site() { return fetch_site[Math.floor(Math.random() * fetch_site.length)]; },
   countrys() { return country[Math.floor(Math.random() * country.length)]; },
-  type() { return type[Math.floor(Math.random() * type.length)]; },
+  type() { return type_list[Math.floor(Math.random() * type_list.length)]; },
 }
 
 function randstr(length) {
